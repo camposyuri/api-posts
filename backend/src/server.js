@@ -1,10 +1,9 @@
 const express = require("express");
+const routes = require("./routes");
 
 const app = express();
 
-app.get("/", (request, response) => {
-  return response.json({ message: "Hello World!" });
-});
+app.use(routes);
 
 app.listen(3001, () => {
   console.log("Server is running!");
