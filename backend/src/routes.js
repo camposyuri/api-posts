@@ -3,6 +3,8 @@ const routes = express.Router();
 
 const knex = require("./database");
 
+// Routes Posts
+
 routes.get("/posts", async (request, response) => {
   return knex("posts")
     .select("*")
@@ -40,6 +42,14 @@ routes.get("/posts/:id", (request, response) => {
       return response.json(post);
     })
     .catch((err) => response.status(404).send(err));
+});
+
+// Routes Comments
+routes.get("/comments", async (request, response) => {
+  return knex("comments")
+    .select("*")
+    .orderBy("id")
+    .then((comment) => response.json(comment));
 });
 
 module.exports = routes;
