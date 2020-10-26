@@ -49,7 +49,8 @@ routes.get("/comments", async (request, response) => {
   return knex("comments")
     .select("*")
     .orderBy("id")
-    .then((comment) => response.json(comment));
+    .then((comment) => response.json(comment))
+    .catch((err) => response.status(404).send(err));
 });
 
 module.exports = routes;
