@@ -32,21 +32,14 @@ routes.post("/posts", (request, response) => {
   }
 });
 
-routes.get("/posts/:id", async (request, response) => {
-  // if (request.params.id) {
-  //   return response.json({ error: "Page not found 404" });
-  // }
-  try {
-    knex("posts")
-      .where({ id: request.params.id })
-      .first()
-      .then((post) => {
-        return response.json(post);
-      })
-      .catch((err) => response.status(201).send(err));
-  } catch (error) {
-    return response.
-  }
+routes.get("/posts/:id", (request, response) => {
+  knex("posts")
+    .where({ id: request.params.id })
+    .first()
+    .then((post) => {
+      return response.json(post);
+    })
+    .catch((err) => response.status(404).send(err));
 });
 
 module.exports = routes;
